@@ -19,7 +19,7 @@ notes.post('/', (req, res) => {
     const newNote = {
       title,
       text,
-      tip_id: uuidv4(),
+      id: uuidv4(),
     };
 
 //  read db from file and convert to json
@@ -35,5 +35,15 @@ fs.writeFileSync('./db/db.json', JSON.stringify(notes), 'utf8');
     res.error('Error in adding note');
   }
 });
+
+notes.delete('/:id', (req, res) => {
+    let notes = fs.readFileSync("./db/db.json", "utf8");
+    notes = JSON.parse(notes);
+    const filteredNotes = notes.filter((note) => req.params.id !== note.id )
+
+    fs.writeFileSync('./db/db.json', JSON.stringify(filteredNotes), 'utf8');
+
+    res.json(`Note removed successfully`);
+})
 
 module.exports = notes;

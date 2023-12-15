@@ -2,14 +2,16 @@ const express = require('express');
 const path = require('path');
 const api = require('./routes/index.js');
 
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.use(express.static('public'));
 
 // Middleware for parsing JSON and urlencoded form data
+// below urlencoded allows you to use URL to send and receive info
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 app.use('/api', api);
 
 
@@ -18,19 +20,9 @@ app.get('/notes', (req, res) =>
 res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
-// // GET Route for api/notes page do i need this too?
-// app.get('/api/notes', (req, res) =>
-// res.sendFile(path.join(__dirname, '/public/notes.html'))
-// );
-
 // GET Route for index page
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/index.html'))
-);
-
-// DELETE Route for note page 
-app.delete('./api/notes/:id', ( req, res) =>
-    res.sendFile(path.join(__dirname, '/db/db.json'))
 );
 
 app.listen(PORT, () =>
