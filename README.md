@@ -152,7 +152,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Walkthrough Video
 
-* [Walkthrough Video Link]()
+* [Walkthrough Video Link](https://drive.google.com/file/d/1SpOFAE8ns8g2jsesHujhOoUzgG1m8hSA/view)
 
 ### Application Steps
 
